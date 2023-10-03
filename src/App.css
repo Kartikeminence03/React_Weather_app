@@ -1,3 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+  /* background-color: rgb(115, 246, 255); */
+}
 .App {
   text-align: center;
 }

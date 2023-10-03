@@ -1,0 +1,40 @@
+Create a basic weather app that displays the hourly weather report for a given location using React.js and Context API.
+
+Requirements:
+
+1. UI Layout:
+   - The app should have a simple and clean UI.
+   - Display the app title as "Hourly Weather Report."
+
+2. Hourly Weather Data:
+   - Fetch hourly weather data from the OpenWeatherMap API.
+   - Use Axios or any other suitable library for making API requests.
+
+3. Context API:
+   - Implement the Context API for managing the weather data state.
+   - Create a context that provides access to the hourly weather data.
+
+4. Weather Component:
+   - Create a component to display the hourly weather data.
+   - Display the time, weather description, and temperature for each hour.
+
+5. Loading Indicator:
+   - Show a loading indicator while fetching data.
+
+6. API Key:
+   - Replace 'YOUR_API_KEY' with the actual API key from OpenWeatherMap.
+
+6. Default Location :
+Put the default location for weather API is Delhi.
+
+
+
+
+
+
+
+1. Current address- 4456 4592 5233
+2. Permanent address - T-3/169 RSD, Shahpur, Pathankot, Punjab
+3. Official Email id - kartik.eminence@gmail.com
+4. IFSC Code - HDfc0002910
+5. HDFC Account No - 59108288934310

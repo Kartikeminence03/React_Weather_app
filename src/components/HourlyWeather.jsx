@@ -11,6 +11,7 @@ function HourlyWeather() {
   const[runEffect,setRunEffect]=useState(true);
 
 const [timeOptions, setTimeOptions] = useState([]);
+const [dateOptions, setDateOptions] = useState([]);
 
   let city_Nane = weatherData?.city?.name;
   useEffect(()=>{
@@ -39,6 +40,8 @@ const [timeOptions, setTimeOptions] = useState([]);
   /*================================ date and time ===============================*/
 // console.log(weatherData,'=->>=>');
 
+
+
 // Function to generate dynamic time options
 const generateTimeOptions = () => {
   let time=checkDate.getHours();
@@ -61,10 +64,36 @@ const generateTimeOptions = () => {
   return options;
 };
 
+
+const generateDateOptions = () => {
+  let date=checkDate.getDate();
+  let month = checkDate.getMonth();
+  
+  const options = [];
+    // console.log(checkDate,time,"-> h for g");
+  // Generate options for every 3 hours
+  for (let i = 0; i <= 10; i++) {
+
+    const hour = i;
+    if(hour>=date){ //hour>=(time-3)
+    const formattedHour = hour.toString().padStart(2, "0");
+    options.push(
+      <option key={hour} value={formattedHour}>
+        {`2023-${month+1}-${formattedHour}`}
+      </option>
+    );
+    }
+  }
+
+  return options;
+};
+
 useEffect(() => {
   // Generate the time options once when the component mounts
   const options = generateTimeOptions();
+  const datesOptions = generateDateOptions();
   setTimeOptions(options);
+  setDateOptions(datesOptions)
 }, []);
 
 
@@ -155,11 +184,12 @@ useEffect(() => {
             onChange={dateChange}
             className="px-4 py-2 border-none bg-teal-400 text-white">
             <option value="">Select date</option>
-            <option value="04">2023-10-04</option>
+            {/* <option value="04">2023-10-04</option>
             <option value="05">2023-10-05</option>
             <option value="06">2023-10-06</option>
             <option value="07">2023-10-07</option>
-            <option value="08">2023-10-08</option>
+            <option value="08">2023-10-08</option> */}
+            {dateOptions}
           </select>
 
           <label htmlFor="time" className="text-gray-700 text-sm  font-bold">
@@ -170,7 +200,7 @@ useEffect(() => {
             value=''
             onChange={timeChange}
             className="px-4 py-2 border-none bg-teal-400 text-white">
-            <option value=""> Select Time</option>
+            {/* <option value=""> {get_Time(checkDate) === '00:00:00' ? 'All' : get_Time(checkDate)}</option> */}
            
         {timeOptions}
           </select>

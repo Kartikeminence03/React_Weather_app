@@ -70,16 +70,15 @@ const generateDateOptions = () => {
   let month = checkDate.getMonth();
   
   const options = [];
-    // console.log(checkDate,time,"-> h for g");
   // Generate options for every 3 hours
   for (let i = 0; i <= 10; i++) {
 
     const hour = i;
-    if(hour>=date){ //hour>=(time-3)
+    if(hour>=date){ //hour>=(date-3)
     const formattedHour = hour.toString().padStart(2, "0");
     options.push(
       <option key={hour} value={formattedHour}>
-        {`2023-${month+1}-${formattedHour}`}
+        {`${formattedHour}-${month+1}-2023`}
       </option>
     );
     }
@@ -126,7 +125,7 @@ useEffect(() => {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0'); // Add leading zero if needed
     const day = String(date.getDate()).padStart(2, '0'); // Add leading zero if needed
-    let formattedDate = `${year}-${month}-${day}`;
+    let formattedDate = `${day}-${month}-${year}`;
      return formattedDate;
         }
 
@@ -183,12 +182,8 @@ useEffect(() => {
             value=''
             onChange={dateChange}
             className="px-4 py-2 border-none bg-teal-400 text-white">
-            {/*<option value="">Select date</option>*/}
-            {/* <option value="04">2023-10-04</option>
-            <option value="05">2023-10-05</option>
-            <option value="06">2023-10-06</option>
-            <option value="07">2023-10-07</option>
-            <option value="08">2023-10-08</option> */}
+            {/* <option value="04">2023-10-04</option> */}
+            <option value=""> {get_Date(checkDate) === '00:00:00' ? 'All' : get_Date(checkDate)}</option>
             {dateOptions}
           </select>
 
@@ -200,7 +195,7 @@ useEffect(() => {
             value=''
             onChange={timeChange}
             className="px-4 py-2 border-none bg-teal-400 text-white">
-            {/* <option value=""> {get_Time(checkDate) === '00:00:00' ? 'All' : get_Time(checkDate)}</option> */}
+            <option value=""> {get_Time(checkDate)}</option>
            
         {timeOptions}
           </select>

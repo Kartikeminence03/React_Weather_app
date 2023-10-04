@@ -7,17 +7,19 @@ function HourlyWeather() {
   const [searchCity,setSearchCity]= useState('');
   const [checkDate,setCheckDate]=useState(correct_Date_TimE());
   const [apidata,setApiData]=useState(weatherData);
-  const[runEffect,setRunEffect]=useState(true)
-  let arr=[2,3,4,5,6]
+  const [searchData, setsearchData] = useState(false)
+  const[runEffect,setRunEffect]=useState(true);
+
+
+  let city_Nane = weatherData?.city?.name;
   useEffect(()=>{
   
     setApiData(weatherData);
-  },[runEffect,loading]);
+  },[runEffect,loading, city_Nane]);
   /*============================ date and time =========================*/
 
   function correct_Date_TimE() {
     const currentDateAndTime = new Date();
-   // currentDateAndTime.setHours('02');
     currentDateAndTime.setMinutes('00');
     currentDateAndTime.setSeconds('00');
     let currentHours = currentDateAndTime.getHours();
@@ -32,10 +34,10 @@ function HourlyWeather() {
     return currentDateAndTime;
   }
   /*================================ date and time ===============================*/
+// console.log(weatherData,'=->>=>');
 
-  let city_Nane = weatherData?.city?.name;
-console.log(weatherData,'=->>=>');
   const dateChange = (e) => {
+    setsearchData(true)
     const newDate = (e.target.value);
     checkDate.setDate(newDate.toString());
     setCheckDate(checkDate);
@@ -43,6 +45,7 @@ console.log(weatherData,'=->>=>');
   };
 
   const timeChange = (e) => {
+    setsearchData(true)
     const newTime = (e.target.value);
     checkDate.setHours(newTime.toString());
     setCheckDate(checkDate);
@@ -168,14 +171,19 @@ console.log(weatherData,'=->>=>');
 
       
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {apidata.list?.map((allWeatherData, index) => { //  formatTimedigit formatDatedigit
-          //console.log(allWeatherData, checkDate,'->> in map ->>')
-         let API_Time =new Date(allWeatherData.dt_txt);
+      {apidata.list?.map((allWeatherData, index) => { 
+          // console.log(allWeatherData, checkDate,'->> in map ->>')
+         let apiTime =new Date(allWeatherData.dt_txt);
          
-           if(API_Time.getFullYear() === checkDate.getFullYear() && API_Time.getMonth() === checkDate.getMonth() &&
-           API_Time.getDate() === checkDate.getDate() &&  API_Time.getHours() >= checkDate.getHours() &&
-           API_Time.getMinutes() === checkDate.getMinutes()
-         ){
+         if (apiTime.getFullYear() === checkDate.getFullYear() &&
+         apiTime.getMonth() === checkDate.getMonth() &&
+         apiTime.getDate() === checkDate.getDate() &&
+         (
+           (!searchData && apiTime.getHours() >= checkDate.getHours()) ||
+           (searchData && apiTime.getHours() === checkDate.getHours())
+         ) &&
+         apiTime.getMinutes() === checkDate.getMinutes()
+       ){
 
           return(
             <li
@@ -184,10 +192,10 @@ console.log(weatherData,'=->>=>');
     >
       <div className="p-4 space-y-2">
         <p>
-          <span className="font-semibold">Date:</span> {get_Date(API_Time)}
+          <span className="font-semibold">Date:</span> {get_Date(apiTime)}
         </p>
         <p>
-          <span className="font-semibold">Time:</span> {get_Time(API_Time)}
+          <span className="font-semibold">Time:</span> {get_Time(apiTime)}
         </p>
 
         <p className="text-xl font-semibold">

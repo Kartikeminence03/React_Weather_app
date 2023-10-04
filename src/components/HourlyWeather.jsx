@@ -236,7 +236,7 @@ useEffect(() => {
           return(
             <li
       key={index}
-      className="border rounded-lg shadow-lg bg-sky-200 via-sky-200 to-zinc-500 text-black hover:bg-blue-400 hover:text-rose-500"
+      className="border rounded-lg shadow-lg bg-sky-200 via-sky-200 to-zinc-500 text-black hover:bg-blue-400 hover:text-white"
     >
       <div className="p-4 space-y-2">
         <p>
@@ -246,21 +246,18 @@ useEffect(() => {
           <span className="font-semibold">Time:</span> {get_Time(apiTime)}
         </p>
 
-        <p className="text-xl font-semibold">
-          Time: {allWeatherData.dt_txt} | Wind:{' '}
+        <p>
+        <span className="font-semibold">Wind:</span>
           {Math.round(allWeatherData.wind.speed * 3.6)} km/h
         </p>
-        <p className="text-xl font-semibold">
-          Description: {allWeatherData.weather[0].description}
+        <p>
+          <span className="font-semibold">Description:</span> {allWeatherData.weather[0].description}
         </p>
-        <p className="text-xl font-semibold">
-          Wind: {Math.round(allWeatherData.wind.speed * 3.6)} km/h
+        <p>
+          <span className="font-semibold">Temperature:</span> {allWeatherData.main.temp}°C
         </p>
-        <p className="text-xl font-semibold">
-          Temperature: {allWeatherData.main.temp}°C
-        </p>
-        <p className="text-xl font-semibold">
-          Visibility: {allWeatherData.visibility}
+        <p>
+          <span className="font-semibold">Visibility:</span> {allWeatherData.visibility}
         </p>
       </div>
     </li>

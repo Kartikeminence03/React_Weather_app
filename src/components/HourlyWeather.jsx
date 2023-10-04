@@ -110,7 +110,7 @@ console.log(weatherData,'=->>=>');
   return (
     
 
-    <div className="bg-yellow-500 p-4 text-white rounded-lg shadow-lg">
+    <div className="bg-yellow-500 p-4 text-white shadow-lg">
       <h1 className="text-2xl font-bold">Hourly Weather Report {city_Nane}</h1>
 
       <div className="flex items-center space-x-4">
@@ -169,7 +169,7 @@ console.log(weatherData,'=->>=>');
       
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {apidata.list?.map((allWeatherData, index) => { //  formatTimedigit formatDatedigit
-          console.log(allWeatherData, checkDate,'->> in map ->>')
+          //console.log(allWeatherData, checkDate,'->> in map ->>')
          let API_Time =new Date(allWeatherData.dt_txt);
          
            if(API_Time.getFullYear() === checkDate.getFullYear() && API_Time.getMonth() === checkDate.getMonth() &&

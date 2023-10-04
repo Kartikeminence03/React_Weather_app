@@ -10,6 +10,7 @@ function HourlyWeather() {
   const [searchData, setsearchData] = useState(false)
   const[runEffect,setRunEffect]=useState(true);
 
+const [timeOptions, setTimeOptions] = useState([]);
 
   let city_Nane = weatherData?.city?.name;
   useEffect(()=>{
@@ -17,6 +18,8 @@ function HourlyWeather() {
     setApiData(weatherData);
   },[runEffect,loading, city_Nane]);
   /*============================ date and time =========================*/
+
+
 
   function correct_Date_TimE() {
     const currentDateAndTime = new Date();
@@ -35,6 +38,36 @@ function HourlyWeather() {
   }
   /*================================ date and time ===============================*/
 // console.log(weatherData,'=->>=>');
+
+// Function to generate dynamic time options
+const generateTimeOptions = () => {
+  let time=checkDate.getHours();
+  const options = [];
+    // console.log(checkDate,time,"-> h for g");
+  // Generate options for every 3 hours
+  for (let i = 0; i <= 7; i++) {
+
+    const hour = i * 3;
+    if(hour>=time){ //hour>=(time-3)
+    const formattedHour = hour.toString().padStart(2, "0");
+    options.push(
+      <option key={hour} value={formattedHour}>
+        {`${formattedHour}:00:00`}
+      </option>
+    );
+    }
+  }
+
+  return options;
+};
+
+useEffect(() => {
+  // Generate the time options once when the component mounts
+  const options = generateTimeOptions();
+  setTimeOptions(options);
+}, []);
+
+
 
   const dateChange = (e) => {
     setsearchData(true)
@@ -58,7 +91,6 @@ function HourlyWeather() {
 
   const Search_Click_data=()=>{
   updateSearchCity(searchCity); 
-    setSearchCity('');
   }
 
   function get_Date(date){
@@ -77,9 +109,6 @@ function HourlyWeather() {
           return formattedTime;
         }
   
-
-  
-
   if (loading) {
     return (
       <div className="flex h-screen items-center justify-center bg-teal-400">
@@ -142,14 +171,8 @@ function HourlyWeather() {
             onChange={timeChange}
             className="px-4 py-2 border-none bg-teal-400 text-white">
             <option value=""> Select Time</option>
-            <option value="09">09:00:00</option>
-            <option value="12">12:00:00</option>
-            <option value="15">15:00:00</option>
-            <option value="18">18:00:00</option>
-            <option value="21">21:00:00</option>
-            <option value="00">00:00:00</option>
-            <option value="03">03:00:00</option>
-            <option value="06">06:00:00</option>
+           
+        {timeOptions}
           </select>
         </div>
 

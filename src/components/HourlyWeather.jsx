@@ -153,7 +153,7 @@ function HourlyWeather() {
           </select>
         </div>
 
-      <div className="relative mt-4">
+      <div className="relative mt-4 mb-4">
         <input
           type="text"
           placeholder="Search location..."
@@ -163,7 +163,7 @@ function HourlyWeather() {
         />
         <button
           onClick={Search_Click_data}
-          className="absolute ml-4 top-0 right-0 bottom-0 px-4 py-2 rounded-full bg-teal-400 text-white hover:bg-amber-500"
+          className="absolute ml-4 top-0 bottom-0 px-4 py-2 rounded-full bg-teal-400 text-white hover:bg-amber-500"
         >
           Search
         </button>

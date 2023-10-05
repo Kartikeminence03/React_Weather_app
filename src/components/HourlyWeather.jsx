@@ -12,6 +12,9 @@ function HourlyWeather() {
 
 const [timeOptions, setTimeOptions] = useState([]);
 const [dateOptions, setDateOptions] = useState([]);
+const [allData, setAllData] = useState(false);
+
+// console.log(apidata,"==========>>>>Api data");
 
   let city_Nane = weatherData?.city?.name;
   useEffect(()=>{
@@ -94,6 +97,10 @@ useEffect(() => {
   setTimeOptions(options);
   setDateOptions(datesOptions)
 }, []);
+
+function showAllData(){
+  setAllData(true)
+}
 
 
 
@@ -181,7 +188,7 @@ useEffect(() => {
             id="date"
             value=''
             onChange={dateChange}
-            className="px-4 py-2 border-none bg-teal-400 text-white">
+            className="px-4 py-2 border-none bg-teal-400 text-white hover:bg-blue-700">
             {/* <option value="04">2023-10-04</option> */}
             <option value=""> {get_Date(checkDate) === '00:00:00' ? 'All' : get_Date(checkDate)}</option>
             {dateOptions}
@@ -194,11 +201,13 @@ useEffect(() => {
             id="time"
             value=''
             onChange={timeChange}
-            className="px-4 py-2 border-none bg-teal-400 text-white">
+            className="px-4 py-2 border-none bg-teal-400 text-white hover:bg-blue-700">
             <option value=""> {get_Time(checkDate)}</option>
            
         {timeOptions}
           </select>
+
+          <button onClick={()=>showAllData()} class="bg-teal-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">All Data</button>
         </div>
 
       <div className="relative mt-4 mb-4">
@@ -220,17 +229,15 @@ useEffect(() => {
       
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {apidata.list?.map((allWeatherData, index) => { 
-          // console.log(allWeatherData, checkDate,'->> in map ->>')
          let apiTime =new Date(allWeatherData.dt_txt);
          
          if (apiTime.getFullYear() === checkDate.getFullYear() &&
-         apiTime.getMonth() === checkDate.getMonth() &&
          apiTime.getDate() === checkDate.getDate() &&
          (
            (!searchData && apiTime.getHours() >= checkDate.getHours()) ||
            (searchData && apiTime.getHours() === checkDate.getHours())
-         ) &&
-         apiTime.getMinutes() === checkDate.getMinutes()
+         ) || (allData===true)
+        //  apiTime.getMinutes() === checkDate.getMinutes()
        ){
 
           return(

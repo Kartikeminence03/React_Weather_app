@@ -110,6 +110,7 @@ function showAllData(){
     checkDate.setDate(newDate.toString());
     setCheckDate(checkDate);
     setRunEffect(!runEffect)
+    setAllData(false)
   };
 
   const timeChange = (e) => {
@@ -118,6 +119,7 @@ function showAllData(){
     checkDate.setHours(newTime.toString());
     setCheckDate(checkDate);
     setRunEffect(!runEffect)
+    setAllData(false)
   };
 
   const location_Data = (event) => {
@@ -236,7 +238,7 @@ function showAllData(){
          (
            (!searchData && apiTime.getHours() >= checkDate.getHours()) ||
            (searchData && apiTime.getHours() === checkDate.getHours())
-         ) || (allData===true)
+         ) || (allData!==false) || (allData===true)
         //  apiTime.getMinutes() === checkDate.getMinutes()
        ){
 
